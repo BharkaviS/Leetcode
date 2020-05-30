@@ -1,6 +1,7 @@
 /*
 Given a binary tree, return the inorder traversal of its nodes' values.
 
+(This can also be solved using stack)
 Example:
 
 Input: [1,null,2,3]
