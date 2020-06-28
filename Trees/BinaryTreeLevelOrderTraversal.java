@@ -21,40 +21,21 @@ return its level order traversal as:
 
 class Solution {
     
-    public int height(TreeNode root){
-        if(root==null){
-            return 0;
-        }
-        int lh = height(root.left);
-        int rh = height(root.right);
-        if(lh<rh){
-            return rh+1;
-        }
-        return lh+1;
-    }
-    
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> arr = new ArrayList<List<Integer>>();
-        int d = height(root);
-        for(int i=1;i<=d;i++){
-            List<Integer> a = new ArrayList<Integer>(); 
-            arr.add(LevelOrder(root,i,a));
-        }
+        List<List<Integer>> arr = new ArrayList<>();
+        LevelOrder(root,arr,0);
         return arr;
     }
-    public List<Integer> LevelOrder(TreeNode root, int level,List<Integer> a){
-        if(level==1){
-            a.add(root.val);
+    
+    public void LevelOrder(TreeNode root,List<List<Integer>> arr,int h){
+        if(root==null){
+            return;
         }
-        else if(level>1){
-            if(root.left!=null){
-            LevelOrder(root.left,level-1,a);
-            }
-            if(root.right!=null){
-            LevelOrder(root.right,level-1,a);
-            }
+        if(h>=arr.size()){
+            arr.add(new ArrayList<>());
         }
-      
-        return a;
-   }
+        arr.get(h).add(root.val);
+        LevelOrder(root.left,arr,h+1);
+        LevelOrder(root.right,arr,h+1);
+    }
 }
